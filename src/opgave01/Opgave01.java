@@ -9,6 +9,8 @@ public class Opgave01 {
         List.add("World");
 
         List.remove("World");
+        //List.clear();
         List.add("hej");
+
     }
 }

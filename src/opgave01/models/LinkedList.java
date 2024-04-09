@@ -3,6 +3,7 @@ package opgave01.models;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class LinkedList<E> implements ListEaaa<E> {
     private Node head;
     private Node tail;
@@ -22,28 +23,31 @@ public class LinkedList<E> implements ListEaaa<E> {
 
     @Override
     public boolean remove(E e) {
-        Node removeNode = new Node(e);
-        Node last = new Node(e);
+        Node removeNode = head;
+        Node last = head;
 
-        if(head.getElement()==e) {
+        if (head.getElement() == e) {
             head = head.getNext();
-        }
-        if(head==null) {
-            tail.setNext(null);
-            return true;
+            if (head == null) {
+                tail.setElement(null);
+                return true;
+            }
         }
 
         while (removeNode != null) {
             if (removeNode.getElement().equals(e)) {
                 last.setNext(removeNode.getNext());
-
                 return true;
             }
-            if (tail.getElement().equals(e)) {
-                tail=last;
-                last.setNext(null);
+                if (tail.getElement().equals(e)) {
+                    tail = last;
+                    last.setNext(null);
+                    return true;
+                }
+                last=removeNode;
+                removeNode = removeNode.getNext();
             }
-        }
+
         return false;
     }
 
@@ -70,15 +74,21 @@ public class LinkedList<E> implements ListEaaa<E> {
     @Override
     public void clear() {
 
+        tail.setElement(null);
+        head.setElement(null);
+
+
     }
 
     @Override
     public int size() {
+
         return 0;
     }
 
     @Override
     public boolean isEmpty() {
+
         return false;
     }
 
@@ -125,11 +135,14 @@ public class LinkedList<E> implements ListEaaa<E> {
             return element;
         }
 
+        public void setElement(E element) {
+            this.element = element;
+        }
+
         public void setNext(Node next) {
             this.next = next;
         }
     }
-
 
 
 }
